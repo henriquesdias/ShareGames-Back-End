@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
-import { STATUS_CODE } from "../helpers/status-code.js";
-import { postsService } from "../services/posts-services.js";
+import { STATUS_CODE } from "../helpers/status-code";
+import { postsService } from "../services/posts-services";
 
 export async function getPosts(req: Request, res: Response) {
   try {

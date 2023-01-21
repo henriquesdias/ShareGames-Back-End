@@ -1,4 +1,4 @@
-import { prisma } from "../config/database-postgres.js";
+import { prisma } from "../config/database-postgres";
 
 async function findMany() {
   return prisma.posts.findMany({

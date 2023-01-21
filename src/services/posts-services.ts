@@ -1,4 +1,4 @@
-import { postsRepository } from "../repository/posts-repository.js";
+import { postsRepository } from "../repository/posts-repository";
 
 async function getPosts() {
   const posts = await postsRepository.findMany();

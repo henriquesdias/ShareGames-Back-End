@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "NODE_ENV=test npx jest",
     "dev": "NODE_ENV=development npx nodemon src/index.ts",
     "dev:load-envs": "dotenv -e .env.development",
     "test:load-envs": "dotenv -e .env.test",
     "dev:migration": "npm run dev:load-envs npx prisma migrate dev",
-    "test:migration" : "npm run test:load-envs npx prisma migrate dev" 
+    "test:migration": "npm run test:load-envs npx prisma migrate dev"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +24,7 @@
     "joi": "^17.7.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@types/express": "^4.17.15",
     "@types/jest": "^29.2.6",
     "@types/supertest": "^2.0.12",

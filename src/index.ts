@@ -1,20 +1,20 @@
 import express from "express";
-import loadEnv from "./config/envs.js";
-import { prisma } from "./config/database-postgres.js";
+import cors from "cors";
+
+import loadEnv from "./config/envs";
+import { postRouter } from "./routers/posts-routers";
+import { authRouter } from "./routers/auth.routers";
 
 loadEnv();
 
 const server = express();
+server.use(cors());
+server.use(express.json());
+server.use(postRouter);
+server.use(authRouter);
 
-server.get("/", async (req, res) => {
-  try {
-    const users = await prisma.users.findMany();
-    res.send(users);
-  } catch (error) {
-    console.log(error);
-    res.send("error");
-  }
-});
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 4000;
 
 server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+
+export default server;

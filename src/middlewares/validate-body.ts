@@ -1,4 +1,4 @@
-import { bool, ObjectSchema } from "joi";
+import { ObjectSchema } from "joi";
 import { NextFunction, Request, Response } from "express";
 
 import { STATUS_CODE } from "../helpers/status-code";

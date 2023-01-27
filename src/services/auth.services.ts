@@ -1,5 +1,6 @@
 import { authRepository } from "../repository/auth-repository";
 import { newUser } from "../protocols";
+import bcrypt from "bcrypt";
 
 export async function createNewUser(user: newUser) {
   const userByEmail = await authRepository.findUserByEmail(user.email);
@@ -13,7 +14,12 @@ export async function createNewUser(user: newUser) {
       message: "this username already in use",
     };
   }
-  return authRepository.create(user);
+  return authRepository.create({
+    email: user.email,
+    username: user.username,
+    password: bcrypt.hashSync(user.password, 10),
+    picture: user.picture,
+  });
 }
 
 export const authService = {

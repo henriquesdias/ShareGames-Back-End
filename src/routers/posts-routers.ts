@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { getPosts } from "../controllers/posts-controller";
+import { getPosts } from "../controllers/posts-controllers";
 
 const postRouter = Router();
 

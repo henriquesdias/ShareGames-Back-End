@@ -14,7 +14,7 @@ beforeEach(async () => {
 const api = supertest(server);
 
 describe("GET /", () => {
-  it("testando", async () => {
+  it("should respond with status 200 and posts data", async () => {
     const user = await createUser();
     const post = await createPost(user.id);
     const comment = await createComment(user.id, post.id);

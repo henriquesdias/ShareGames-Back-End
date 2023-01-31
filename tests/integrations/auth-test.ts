@@ -6,6 +6,7 @@ import { prisma } from "../../src/config/database-postgres";
 import { STATUS_CODE } from "../../src/helpers/status-code";
 import { cleanDatabase } from "../helpers";
 import { createUser } from "../factories/users-factories";
+import { any, number, string } from "joi";
 
 beforeEach(async () => {
   await cleanDatabase();
@@ -67,5 +68,38 @@ describe("Post /sign-up", () => {
     const response = await api.post("/sign-up").send(newUser);
 
     expect(response.status).toBe(STATUS_CODE.CONFLICT);
+  });
+});
+
+describe("POST /sign-in", () => {
+  it("should respond with status 200 and returns a token", async () => {
+    const password = faker.internet.password(8);
+    const user = await createUser(password);
+
+    const response = await api
+      .post("/sign-in")
+      .send({ email: user.email, password });
+    expect(response.status).toBe(STATUS_CODE.OK);
+    expect(response.body).toEqual({ token: expect.any(String) });
+  });
+
+  it("should respond with status 401 if email sent do not exists", async () => {
+    const response = await api.post("/sign-in").send({
+      email: faker.internet.email(),
+      password: faker.internet.password(),
+    });
+
+    expect(response.status).toBe(STATUS_CODE.UNAUTHORIZED);
+  });
+
+  it("should respond with status 401 if password is not valid", async () => {
+    const user = await createUser();
+
+    const response = await api.post("/sign-in").send({
+      email: user.email,
+      password: faker.internet.password(8),
+    });
+
+    expect(response.status).toBe(STATUS_CODE.UNAUTHORIZED);
   });
 });

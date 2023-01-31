@@ -1,11 +1,13 @@
 import { Router } from "express";
 
 import { validateBody } from "../middlewares/validate-body";
-import { userSchema } from "../schemas/user";
-import { createNewUser } from "../controllers/auth.controllers";
+import { userSchema, loginSchema } from "../schemas/user";
+import { createNewUser, signIn } from "../controllers/auth.controllers";
 
 const authRouter = Router();
 
-authRouter.post("/sign-up", validateBody(userSchema), createNewUser);
+authRouter
+  .post("/sign-up", validateBody(userSchema), createNewUser)
+  .post("/sign-in", validateBody(loginSchema), signIn);
 
 export { authRouter };

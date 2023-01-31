@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test jest --runInBand",
-    "dev": "NODE_ENV=development npx nodemon src/init.ts",
+    "dev": "NODE_ENV=development npx nodemon src/server.ts",
     "dev:load-envs": "dotenv -e .env.development",
     "test:load-envs": "dotenv -e .env.test",
     "dev:migration": "npm run dev:load-envs npx prisma migrate dev",

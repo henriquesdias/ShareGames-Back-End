@@ -4,3 +4,5 @@ export type newUser = {
   username: string;
   picture?: string;
 };
+
+export type loginInfo = Omit<newUser, "username" | "picture">;

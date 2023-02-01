@@ -32,7 +32,10 @@ async function signIn(email: string, password: string) {
       message: "the credentials are wrong",
     };
   }
-  return jwt.sign(user.email, process.env.JWT_SECRET);
+  return jwt.sign(
+    { userId: user.id, email: user.email },
+    process.env.JWT_SECRET
+  );
 }
 
 export const authService = {

@@ -6,3 +6,7 @@ export type newUser = {
 };
 
 export type loginInfo = Omit<newUser, "username" | "picture">;
+
+export type descriptionPost = {
+  description: string;
+};

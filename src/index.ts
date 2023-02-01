@@ -3,7 +3,7 @@ import cors from "cors";
 
 import loadEnv from "./config/envs";
 import { postRouter } from "./routers/posts-routers";
-import { authRouter } from "./routers/auth.routers";
+import { authRouter } from "./routers/auth-routers";
 
 loadEnv();
 

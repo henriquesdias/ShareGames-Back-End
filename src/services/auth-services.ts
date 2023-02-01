@@ -1,8 +1,10 @@
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+
 import { authRepository } from "../repository/auth-repository";
 import { newUser } from "../protocols";
-import bcrypt from "bcrypt";
 
-export async function createNewUser(user: newUser) {
+async function createNewUser(user: newUser) {
   const userByEmail = await authRepository.findUserByEmail(user.email);
   if (userByEmail) {
     throw { name: "errorWithEmail", message: "this email already in use" };
@@ -22,6 +24,21 @@ export async function createNewUser(user: newUser) {
   });
 }
 
+async function signIn(email: string, password: string) {
+  const user = await authRepository.findUserByEmail(email);
+  if (!user || !bcrypt.compareSync(password, user.password)) {
+    throw {
+      name: "unauthorized",
+      message: "the credentials are wrong",
+    };
+  }
+  return jwt.sign(
+    { userId: user.id, email: user.email },
+    process.env.JWT_SECRET
+  );
+}
+
 export const authService = {
   createNewUser,
+  signIn,
 };

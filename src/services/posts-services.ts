@@ -5,6 +5,11 @@ async function getPosts() {
   return posts;
 }
 
+async function createPost(userId: number, description: string) {
+  return postsRepository.create(userId, description);
+}
+
 export const postsService = {
   getPosts,
+  createPost,
 };

@@ -38,6 +38,16 @@ async function findMany() {
   });
 }
 
+async function create(userId: number, description: string) {
+  return prisma.posts.create({
+    data: {
+      userId,
+      description,
+    },
+  });
+}
+
 export const postsRepository = {
   findMany,
+  create,
 };

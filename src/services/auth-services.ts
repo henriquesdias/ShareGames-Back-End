@@ -37,8 +37,9 @@ async function signIn(email: string, password: string) {
     process.env.JWT_SECRET
   );
 }
-
-export const authService = {
+const authService = {
   createNewUser,
   signIn,
 };
+
+export default authService;

@@ -47,7 +47,16 @@ async function create(userId: number, description: string) {
   });
 }
 
+async function findUnique(postId: number) {
+  return prisma.posts.findFirst({
+    where: {
+      id: postId,
+    },
+  });
+}
+
 export const postsRepository = {
   findMany,
   create,
+  findUnique,
 };

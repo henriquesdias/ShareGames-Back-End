@@ -6,7 +6,6 @@ import { prisma } from "../../src/config/database-postgres";
 import { STATUS_CODE } from "../../src/helpers/status-code";
 import { cleanDatabase } from "../helpers";
 import { createUser } from "../factories/users-factories";
-import { any, number, string } from "joi";
 
 beforeEach(async () => {
   await cleanDatabase();

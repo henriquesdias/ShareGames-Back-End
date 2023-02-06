@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
 import { STATUS_CODE } from "../helpers/status-code";
-import { authService } from "../services/auth-services";
+import authService from "../services/auth-services";
 import { newUser, loginInfo } from "../protocols";
 
 export async function createNewUser(req: Request, res: Response) {

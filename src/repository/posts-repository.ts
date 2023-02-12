@@ -16,21 +16,6 @@ async function findMany() {
           deletedAt: true,
         },
       },
-      Comments: {
-        select: {
-          id: true,
-          description: true,
-          createdAt: true,
-          deletedAt: true,
-          Users: {
-            select: {
-              id: true,
-              username: true,
-              picture: true,
-            },
-          },
-        },
-      },
     },
     where: {
       deletedAt: null,

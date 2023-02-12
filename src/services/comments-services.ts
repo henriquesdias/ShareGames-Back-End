@@ -14,8 +14,17 @@ async function createComment({ postId, userId, description }: newComment) {
   return await commentRepository.create({ postId, userId, description });
 }
 
+async function getAllComments(postId: number) {
+  const post = await postsRepository.findUnique(postId);
+  if (!post) {
+    throw { name: "postDoNotExists", message: "this post do not exists" };
+  }
+  return commentRepository.findMany(postId);
+}
+
 const commentsService = {
   createComment,
+  getAllComments,
 };
 
 export default commentsService;

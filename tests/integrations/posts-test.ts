@@ -20,7 +20,6 @@ describe("GET /", () => {
     const user = await createUser();
 
     const post = await createPost(user.id);
-    const comment = await createComment(user.id, post.id);
 
     const response = await api.get("/");
 
@@ -40,19 +39,6 @@ describe("GET /", () => {
           createdAt: user.createdAt.toISOString(),
           deletedAt: null,
         },
-        Comments: [
-          {
-            id: comment.id,
-            description: comment.description,
-            createdAt: comment.createdAt.toISOString(),
-            deletedAt: null,
-            Users: {
-              id: user.id,
-              username: user.username,
-              picture: user.picture,
-            },
-          },
-        ],
       },
     ]);
   });

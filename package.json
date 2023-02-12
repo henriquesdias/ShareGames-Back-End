@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/src/server.js",
-    "build": "npm i && npx tsc",
+    "start": "npx prisma migrate dev && npm run build && node dist/src/server.js",
+    "build": "npx tsc",
     "test": "NODE_ENV=test jest --runInBand",
-    "dev": "NODE_ENV=development npx nodemon src/server.ts",
+    "dev": "npm run dev:load-envs npx nodemon src/server.ts",
     "dev:load-envs": "dotenv -e .env.development",
     "test:load-envs": "dotenv -e .env.test",
+    "migration": "npx prisma migrate dev",
     "dev:migration": "npm run dev:load-envs npx prisma migrate dev",
     "test:migration": "npm run test:load-envs npx prisma migrate dev"
   },

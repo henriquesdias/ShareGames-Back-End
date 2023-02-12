@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node dist/src/server.js",
+    "build": "npm i && npx tsc",
     "test": "NODE_ENV=test jest --runInBand",
     "dev": "NODE_ENV=development npx nodemon src/server.ts",
     "dev:load-envs": "dotenv -e .env.development",

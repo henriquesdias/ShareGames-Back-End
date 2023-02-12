@@ -34,5 +34,6 @@ export async function getComments(req: Request, res: Response) {
     if (error.name === "postDoNotExists") {
       return res.status(STATUS_CODE.NOT_FOUND).send(error.message);
     }
+    res.sendStatus(STATUS_CODE.BAD_REQUEST);
   }
 }

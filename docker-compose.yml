@@ -3,22 +3,30 @@ services:
   db:
     image: postgres:13
     container_name: db
-    restart: always #container reinicia se morrer
+    restart: always
     ports:
       - 2345:5432
     env_file:
-      - .env #configurar POSTGRES_USER, POSTGRES_PASSWORD e POSTGRES_DB
+      - .env
+    networks:
+      - my-network
     volumes:
       - postgres:/var/lib/postgresql/data
 
   node_app:
     container_name: node_app
-    build: . #Dockerfile do node se encontra na pasta atual
+    build: .
     ports:
-      - 5000:4000
+      - 4000:4000
     depends_on:
-      - db # só sobe quando o postgres tiver no ar
+      - db
+    networks:
+      - my-network
     env_file:
-      - .env #configurar DATABASE_URL
+      - .env
 volumes:
   postgres:
+
+networks:
+  my-network:
+    external: true
